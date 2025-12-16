@@ -142,7 +142,7 @@ export default function QuizEditor() {
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="bg-gradient-to-r from-blue-600 to-cyan-600
+                className="bg-linear-to-r from-blue-600 to-cyan-600
                            hover:from-blue-700 hover:to-cyan-700
                            disabled:from-gray-400 disabled:to-gray-400
                            text-white px-5 py-2 rounded-lg font-bold

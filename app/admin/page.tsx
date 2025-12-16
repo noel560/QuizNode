@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Plus, Edit, Trash2, Play, LogOut, Download, Upload, Settings } from 'lucide-react'
+import { Plus, Edit, Trash2, Play, LogOut, Download, Upload, Settings, Home } from 'lucide-react'
 import ThemeToggle from '@/components/ThemeToggle'
 
 interface Quiz {
@@ -154,13 +154,20 @@ export default function AdminDashboard() {
         <div className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl shadow-lg p-6 mb-6">
           <div className="flex justify-between items-center mb-4">
             <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-2">Admin Dashboard</h1>
+              <h1 className="text-3xl font-bold bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-2">Admin Dashboard</h1>
               <p className="text-gray-600 dark:text-gray-400">Kvízek kezelése</p>
             </div>
             <ThemeToggle />
           </div>
           <div className="flex flex-wrap gap-3">
-            <label className="bg-gray-200 dark:bg-[#323232] hover:bg-gray-300 dark:hover:bg-[#3a3a3a] text-gray-800 dark:text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 transition-all border border-gray-300 dark:border-[#3a3a3a] shadow-sm hover:shadow-md">
+            <button
+              onClick={() => router.push('/')}
+              className="bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 transition-all shadow-sm hover:shadow-md"
+            >
+              <Home size={18} />
+              Főoldal
+            </button>
+            <label className="bg-gray-200 dark:bg-[#323232] hover:bg-gray-300 dark:hover:bg-[#3a3a3a] text-gray-800 dark:text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 transition-all border border-gray-300 dark:border-[#3a3a3a] shadow-sm hover:shadow-md cursor-pointer">
               <Upload size={18} />
               {importing ? 'Importálás...' : 'Import Quiz'}
               <input
@@ -173,7 +180,7 @@ export default function AdminDashboard() {
             </label>
             <button
               onClick={() => router.push('/admin/create')}
-              className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 transition-all shadow-sm hover:shadow-md"
+              className="bg-gray-200 dark:bg-[#323232] hover:bg-gray-300 dark:hover:bg-[#3a3a3a] text-gray-800 dark:text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 transition-all border border-gray-300 dark:border-[#3a3a3a] shadow-sm hover:shadow-md"
             >
               <Plus size={18} />
               Új Kvíz
@@ -201,7 +208,7 @@ export default function AdminDashboard() {
             <p className="text-gray-600 dark:text-gray-400 text-xl mb-4">Még nincsenek kvízek</p>
             <button
               onClick={() => router.push('/admin/create')}
-              className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-6 py-3 rounded-lg font-bold inline-flex items-center gap-2 shadow-md hover:shadow-lg transition-all"
+              className="bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-6 py-3 rounded-lg font-bold inline-flex items-center gap-2 shadow-md hover:shadow-lg transition-all"
             >
               <Plus size={20} />
               Hozz létre egyet!

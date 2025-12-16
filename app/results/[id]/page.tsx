@@ -107,7 +107,7 @@ export default function ResultsPage() {
           <div className="flex gap-4">
             <button
               onClick={() => router.push(`/quiz/${result.quizId}`)}
-              className="flex-1 bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg"
+              className="flex-1 bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg"
             >
               <RotateCcw size={20} />
               Újra próbálom
@@ -135,14 +135,14 @@ export default function ResultsPage() {
                 }`}
             >
               <div className="flex items-start gap-3 mb-4">
-                <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold flex-shrink-0">
+                <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold shrink-0">
                   {index + 1}
                 </span>
                 <p className="text-gray-800 dark:text-white flex-1">{answer.questionText}</p>
                 {answer.isCorrect ? (
-                  <CheckCircle className="text-green-500 flex-shrink-0" size={24} />
+                  <CheckCircle className="text-green-500 shrink-0" size={24} />
                 ) : (
-                  <XCircle className="text-red-500 flex-shrink-0" size={24} />
+                  <XCircle className="text-red-500 shrink-0" size={24} />
                 )}
               </div>
 
@@ -156,10 +156,10 @@ export default function ResultsPage() {
 
                   if (isCorrectAnswer) {
                     bgColor = 'bg-green-600 text-white'
-                    icon = <CheckCircle size={20} className="flex-shrink-0" />
+                    icon = <CheckCircle size={20} className="shrink-0" />
                   } else if (isUserAnswer && !isCorrectAnswer) {
                     bgColor = 'bg-red-600 text-white'
-                    icon = <XCircle size={20} className="flex-shrink-0" />
+                    icon = <XCircle size={20} className="shrink-0" />
                   }
 
                   return (

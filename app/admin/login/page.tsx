@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { Plus, Trash2, Save, ArrowLeft, Check, Loader2 } from 'lucide-react'
 import ThemeToggle from '@/components/ThemeToggle'
 
 export default function AdminLogin() {
@@ -44,8 +45,14 @@ export default function AdminLogin() {
         <ThemeToggle />
       </div>
 
-      <div className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl shadow-xl p-8 w-full max-w-md">
-        <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-6 text-center">
+      <div className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl shadow-xl p-8 w-full max-w-md relative">
+        <button
+          onClick={() => router.push('/')}
+          className="absolute -top-12 left-0 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-2 transition-colors duration-200">
+          <ArrowLeft size={20} />
+          Vissza a főoldalra
+        </button>
+        <h1 className="text-3xl font-bold bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-6 text-center">
           Admin Bejelentkezés
         </h1>
 
@@ -81,7 +88,7 @@ export default function AdminLogin() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 disabled:from-gray-400 disabled:to-gray-500 text-white py-3 rounded-lg font-bold transition-all duration-200 shadow-md hover:shadow-lg"
+            className="w-full bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 disabled:from-gray-400 disabled:to-gray-500 text-white py-3 rounded-lg font-bold transition-all duration-200 shadow-md hover:shadow-lg"
           >
             {loading ? 'Bejelentkezés...' : 'Bejelentkezés'}
           </button>

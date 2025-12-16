@@ -207,7 +207,7 @@ export default function QuizEditPage() {
           <button
             onClick={handleSave}
             disabled={saving}
-            className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 disabled:from-gray-400 disabled:to-gray-400 text-white px-6 py-3 rounded-lg font-bold flex items-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg disabled:shadow-none"
+            className="bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 disabled:from-gray-400 disabled:to-gray-400 text-white px-6 py-3 rounded-lg font-bold flex items-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg disabled:shadow-none"
           >
             <Save size={20} />
             {saving ? 'Mentés...' : 'Kvíz mentése'}
@@ -333,7 +333,7 @@ export default function QuizEditPage() {
                         type="text"
                         value={option}
                         onChange={(e) => updateOption(qIndex, oIndex, e.target.value)}
-                        className={`flex-grow px-4 py-2 border rounded-lg bg-gray-50 dark:bg-[#323232] text-gray-800 dark:text-white focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 ${
+                        className={`grow px-4 py-2 border rounded-lg bg-gray-50 dark:bg-[#323232] text-gray-800 dark:text-white focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 ${
                           isCorrect ? 'border-green-400 dark:border-green-600' : 'border-gray-300 dark:border-[#3a3a3a]'
                         }`}
                         placeholder={`Válasz ${oIndex + 1}`}
@@ -370,7 +370,7 @@ export default function QuizEditPage() {
         <div className="mt-8 text-center">
           <button
             onClick={addQuestion}
-            className="bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg mx-auto"
+            className="bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg mx-auto"
           >
             <Plus size={20} />
             Új kérdés hozzáadása

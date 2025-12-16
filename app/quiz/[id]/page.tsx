@@ -151,7 +151,7 @@ export default function QuizPlayer() {
             return (
               <div key={question.id} className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl shadow-md p-6">
                 <div className="flex items-start gap-3 mb-4">
-                  <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold flex-shrink-0">
+                  <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold shrink-0">
                     {qIndex + 1}
                   </span>
                   <p className="text-gray-800 dark:text-white flex-1">{question.questionText}</p>
@@ -188,7 +188,7 @@ export default function QuizPlayer() {
           <button
             onClick={handleSubmit}
             disabled={submitting || answers.some(a => a.length === 0)}
-            className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 disabled:from-gray-400 disabled:to-gray-500 text-white py-4 rounded-lg text-lg font-bold shadow-lg transition-all"
+            className="w-full bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 disabled:from-gray-400 disabled:to-gray-500 text-white py-4 rounded-lg text-lg font-bold shadow-lg transition-all"
           >
             {submitting ? (
               <span className="flex items-center justify-center gap-2">

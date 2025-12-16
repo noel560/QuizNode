@@ -165,7 +165,7 @@ export default function AdminSettings() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-blue-600 to-cyan-600
+              className="w-full bg-linear-to-r from-blue-600 to-cyan-600
                          hover:from-blue-700 hover:to-cyan-700
                          disabled:from-gray-400 disabled:to-gray-400
                          text-white py-3 rounded-lg font-bold

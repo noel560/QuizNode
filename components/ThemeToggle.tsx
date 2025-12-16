@@ -55,12 +55,12 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="relative w-14 h-7 bg-gray-300 dark:bg-gray-700 rounded-full transition-colors duration-300 border-2 border-gray-400 dark:border-gray-600 hover:scale-105 active:scale-95 shadow-md"
+      className="relative w-14 h-8 bg-gray-300 dark:bg-gray-700 rounded-full transition-colors duration-300 border-2 border-gray-400 dark:border-gray-600 hover:scale-105 active:scale-95 shadow-md overflow-hidden"
       aria-label="Toggle theme"
     >
       <div
-        className={`absolute top-[1px] w-6 h-6 bg-blue-600 rounded-full transition-all duration-300 flex items-center justify-center shadow-lg ${
-          theme === 'dark' ? 'left-[calc(100%-26px)]' : 'left-[1px]'
+        className={`absolute top-px w-7 h-7 bg-blue-600 rounded-full transition-all duration-300 flex items-center justify-center shadow-lg ${
+          theme === 'dark' ? 'left-[calc(100%-26px)]' : 'left-0'
         }`}
       >
         {theme === 'dark' ? (

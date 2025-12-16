@@ -53,7 +53,7 @@ export default function HomePage() {
             <ThemeToggle />
           </div>
           <div className="text-center">
-            <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-4">
+            <h1 className="text-5xl font-bold bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-4">
               Quiz App
             </h1>
             <p className="text-gray-600 dark:text-gray-400 text-xl">
@@ -65,7 +65,7 @@ export default function HomePage() {
         {/* Admin Button */}
         <div className="flex justify-end mb-6">
           <button
-            onClick={() => router.push('/admin/login')}
+            onClick={() => router.push('/admin')}
             className="bg-white dark:bg-[#2b2b2b] hover:bg-gray-100 dark:hover:bg-[#323232] text-gray-800 dark:text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all duration-200 border border-gray-300 dark:border-[#3a3a3a] shadow-md hover:shadow-lg"
           >
             <Shield size={18} />
@@ -117,7 +117,7 @@ export default function HomePage() {
                     e.stopPropagation()
                     router.push(`/quiz/${quiz.id}`)
                   }}
-                  className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
+                  className="w-full bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
                 >
                   <Play size={20} />
                   Kvíz indítása
