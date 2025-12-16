@@ -20,6 +20,7 @@ export default function AdminDashboard() {
   const [quizzes, setQuizzes] = useState<Quiz[]>([])
   const [loading, setLoading] = useState(true)
   const [importing, setImporting] = useState(false)
+  const [userName, setUserName] = useState<string>('')
   const router = useRouter()
 
   useEffect(() => {
@@ -28,6 +29,14 @@ export default function AdminDashboard() {
       router.push('/admin/login')
       return
     }
+    
+    const storedName = localStorage.getItem('adminUsername');
+    if (storedName) {
+        setUserName(storedName);
+    } else {
+        setUserName('Admin'); // Fallback
+    }
+
     fetchQuizzes()
   }, [])
 
@@ -140,6 +149,7 @@ export default function AdminDashboard() {
 
   const handleLogout = () => {
     localStorage.removeItem('adminToken')
+    localStorage.removeItem('adminUsername')
     router.push('/admin/login')
   }
 
@@ -159,7 +169,7 @@ export default function AdminDashboard() {
           <div className="flex justify-between items-center mb-4">
             <div>
               <h1 className="text-3xl font-bold bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-2">Admin Kezelőfelület</h1>
-              <p className="text-gray-600 dark:text-gray-400">Kvízek kezelése</p>
+              <p className="text-gray-600 dark:text-gray-400">{userName ? `Szia, ${userName}!` : 'Admin Kezelőfelület'}</p>
             </div>
             <ThemeToggle />
           </div>

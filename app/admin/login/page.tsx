@@ -32,6 +32,7 @@ export default function AdminLogin() {
 
       if (res.ok) {
         localStorage.setItem('adminToken', data.token)
+        localStorage.setItem('adminUsername', username)
         router.push('/admin')
       } else {
         setError(data.error || 'Hibás bejelentkezés')

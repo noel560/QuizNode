@@ -37,6 +37,8 @@ yarn-error.log*
 *.db-journal
 .DS_Store
 
+scripts/
+
 # vercel
 .vercel
 
