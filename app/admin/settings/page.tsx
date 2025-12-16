@@ -21,9 +21,9 @@ export default function AdminSettings() {
     }
   }, [])
 
-  useEffect(() => {
-    document.title = 'QuizNode Admin - Beállítások'
-  }, [])
+  // useEffect(() => {
+  //   document.title = 'QuizNode Admin - Beállítások'
+  // }, [])
 
   const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault()

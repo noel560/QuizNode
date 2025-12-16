@@ -31,9 +31,9 @@ export default function AdminDashboard() {
     fetchQuizzes()
   }, [])
 
-  useEffect(() => {
-    document.title = 'QuizNode Admin - Kezelőfelület'
-  }, [])
+  // useEffect(() => {
+  //   document.title = 'QuizNode Admin - Kezelőfelület'
+  // }, [])
 
   const fetchQuizzes = async () => {
     try {

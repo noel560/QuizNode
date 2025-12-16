@@ -17,9 +17,9 @@ export default function AdminLogin() {
     setError('')
     setLoading(true)
 
-    useEffect(() => {
-      document.title = 'QuizNode Admin - Bejelentkezés'
-    }, [])
+    // useEffect(() => {
+    //   document.title = 'QuizNode Admin - Bejelentkezés'
+    // }, [])
 
     try {
       const res = await fetch('/api/admin/login', {
