@@ -54,7 +54,7 @@ export default function HomePage() {
           </div>
           <div className="text-center">
             <h1 className="text-5xl font-bold bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-4">
-              Quiz App
+              QuizNode
             </h1>
             <p className="text-gray-600 dark:text-gray-400 text-xl">
               Válassz egy kvízt és teszteld a tudásod! 🚀
@@ -129,7 +129,7 @@ export default function HomePage() {
 
         {/* Footer */}
         <div className="text-center mt-12 text-gray-500 dark:text-gray-600 text-sm">
-          <p>Készítette: Quiz App 2024</p>
+          <p>Készítette: <a href="https://github.com/noel560" target="_blank" rel="noopener noreferrer" className="underline">Noel</a></p>
         </div>
       </div>
     </div>

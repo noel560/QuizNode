@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Plus, Trash2, Save, ArrowLeft, Check, Loader2 } from 'lucide-react'
 import ThemeToggle from '@/components/ThemeToggle'
@@ -16,6 +16,10 @@ export default function AdminLogin() {
     e.preventDefault()
     setError('')
     setLoading(true)
+
+    useEffect(() => {
+      document.title = 'QuizNode Admin - Bejelentkezés'
+    }, [])
 
     try {
       const res = await fetch('/api/admin/login', {

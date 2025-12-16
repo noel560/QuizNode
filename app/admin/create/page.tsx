@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Plus, Trash2, Save, ArrowLeft, Check } from 'lucide-react'
 import ThemeToggle from '@/components/ThemeToggle'
@@ -18,6 +18,14 @@ export default function QuizEditor() {
   const [description, setDescription] = useState('')
   const [questions, setQuestions] = useState<Question[]>([])
   const [saving, setSaving] = useState(false)
+
+  useEffect(() => {
+    if (title.trim()) {
+      document.title = `Új kvíz: ${title}`
+    } else {
+      document.title = 'Új kvíz létrehozása'
+    }
+  }, [title])
 
   const addQuestion = () => {
     setQuestions([

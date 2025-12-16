@@ -55,6 +55,19 @@ export default function QuizPlayer() {
     }
   }
 
+  useEffect(() => {
+    if (quiz) {
+      const answeredCount = answers.filter(a => a.length > 0).length
+      const totalQuestions = quiz.questions.length
+
+      const newTitle = `${quiz.title} | ${answeredCount}/${totalQuestions} megválaszolva`
+
+      document.title = newTitle
+    } else if (!loading) {
+      document.title = 'QuizNode - Kvíz nem található'
+    }
+  }, [quiz, answers, loading])
+
   const handleAnswer = (questionIndex: number, optionIndex: number) => {
     const question = quiz!.questions[questionIndex]
     const newAnswers = [...answers]

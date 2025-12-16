@@ -31,6 +31,10 @@ export default function AdminDashboard() {
     fetchQuizzes()
   }, [])
 
+  useEffect(() => {
+    document.title = 'QuizNode Admin - Kezelőfelület'
+  }, [])
+
   const fetchQuizzes = async () => {
     try {
       const token = localStorage.getItem('adminToken')
@@ -154,7 +158,7 @@ export default function AdminDashboard() {
         <div className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl shadow-lg p-6 mb-6">
           <div className="flex justify-between items-center mb-4">
             <div>
-              <h1 className="text-3xl font-bold bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-2">Admin Dashboard</h1>
+              <h1 className="text-3xl font-bold bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-2">Admin Kezelőfelület</h1>
               <p className="text-gray-600 dark:text-gray-400">Kvízek kezelése</p>
             </div>
             <ThemeToggle />
@@ -169,7 +173,7 @@ export default function AdminDashboard() {
             </button>
             <label className="bg-gray-200 dark:bg-[#323232] hover:bg-gray-300 dark:hover:bg-[#3a3a3a] text-gray-800 dark:text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 transition-all border border-gray-300 dark:border-[#3a3a3a] shadow-sm hover:shadow-md cursor-pointer">
               <Upload size={18} />
-              {importing ? 'Importálás...' : 'Import Quiz'}
+              {importing ? 'Importálás...' : 'Kvíz Importálása'}
               <input
                 type="file"
                 accept=".json"

@@ -40,6 +40,19 @@ export default function ResultsPage() {
     fetchResult()
   }, [attemptId])
 
+  useEffect(() => {
+    if (result) {
+      // Ha az eredmény sikeresen betöltődött
+      document.title = `${result.quiz.title} eredménye: ${result.score} / ${result.totalQuestions}`
+    } else if (!loading) {
+      // Ha nem töltődik, és nincs eredmény (pl. 404)
+      document.title = 'QuizNode - Eredmény nem található'
+    } else {
+      // Betöltés alatt
+      document.title = 'QuizNode - Eredmény betöltése...'
+    }
+  }, [result, loading])
+
   const fetchResult = async () => {
     try {
       const res = await fetch(`/api/results/${attemptId}`)

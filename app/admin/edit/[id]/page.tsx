@@ -26,6 +26,18 @@ export default function QuizEditPage() {
     fetchQuiz()
   }, [quizId])
 
+  useEffect(() => {
+    if (loading) {
+      document.title = 'QuizNode Admin - Betöltés...'
+    } else if (title) {
+      // Ha a kvíz címe betöltődött
+      document.title = `${title} szerkesztése`
+    } else {
+      // Ha betöltődött (és nem történt átirányítás), de valamiért még sincs címe
+      document.title = 'QuizNode Admin - Szerkesztés'
+    }
+  }, [title, loading])
+
   const fetchQuiz = async () => {
     // ... (fetchQuiz funkció változatlan)
     try {
