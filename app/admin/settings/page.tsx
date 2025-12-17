@@ -82,10 +82,11 @@ export default function AdminSettings() {
           <div className="flex items-center justify-between mb-4">
             <button
               onClick={() => router.push('/admin')}
-              className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white flex items-center gap-2"
+              className="text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white flex items-center gap-2 transition-all"
             >
               <ArrowLeft size={20} />
-              Vissza
+              <span className="hidden sm:inline">Vissza az admin felületre</span>
+              <span className="sm:hidden text-sm font-semibold">Vissza</span>
             </button>
             <ThemeToggle />
           </div>
@@ -169,12 +170,11 @@ export default function AdminSettings() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-linear-to-r from-blue-600 to-cyan-600
-                         hover:from-blue-700 hover:to-cyan-700
+              className="w-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/40
                          disabled:from-gray-400 disabled:to-gray-400
-                         text-white py-3 rounded-lg font-bold
+                         py-3 rounded-lg font-bold
                          flex items-center justify-center gap-2
-                         transition-all shadow-md hover:shadow-lg"
+                         transition-all"
             >
               <Save size={20} />
               {loading ? 'Mentés...' : 'Jelszó mentése'}

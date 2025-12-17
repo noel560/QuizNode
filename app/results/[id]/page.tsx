@@ -88,26 +88,26 @@ export default function ResultsPage() {
     <div className="min-h-screen bg-gray-50 dark:bg-[#202020] transition-colors duration-300 p-4">
       <div className="max-w-4xl mx-auto">
         {/* Header - Results Summary */}
-        <div className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl shadow-lg p-8 mb-6">
+        <div className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl shadow-lg p-6 md:p-8 mb-6">
           <div className="flex justify-between items-start mb-6">
-            <h1 className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+            <h1 className="text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-400">
               {result.quiz.title}
             </h1>
             <ThemeToggle />
           </div>
 
-          <div className="bg-gray-100 dark:bg-[#202020] border border-gray-300 dark:border-[#3a3a3a] rounded-xl p-6 mb-4">
+          <div className="bg-gray-100 dark:bg-[#202020] border border-gray-300 dark:border-[#3a3a3a] rounded-xl p-6 mb-8">
             <div className="text-center">
-              <div className="text-6xl font-bold mb-2">
+              <div className="text-5xl md:text-6xl font-bold mb-2">
                 <span className={percentage >= 75 ? 'text-green-600' : percentage >= 50 ? 'text-yellow-600' : 'text-red-600'}>
                   {result.score}
                 </span>
                 <span className="text-gray-400"> / {result.totalQuestions}</span>
               </div>
-              <div className="text-2xl text-gray-700 dark:text-gray-300 mb-4">
+              <div className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 mb-4">
                 {percentage}% helyes válasz
               </div>
-              <div className="text-gray-600 dark:text-gray-400">
+              <div className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
                 {percentage >= 90 ? "🎉 Kiváló! Basszus, te tényleg tudod ezt!" :
                   percentage >= 75 ? "👍 Nagyon jó! Csak pár apróság maradt." :
                     percentage >= 60 ? "😊 Jó munka! Van még min dolgozni." :
@@ -117,41 +117,47 @@ export default function ResultsPage() {
             </div>
           </div>
 
-          <div className="flex gap-4">
+          {/* Akciógombok - Masszívabbak, de az eredeti fontokkal */}
+          <div className="flex flex-col sm:flex-row gap-4">
             <button
               onClick={() => router.push(`/quiz/${result.quizId}`)}
-              className="flex-1 bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg"
+              className="flex-1 min-h-13 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/40 py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all active:scale-95"
             >
-              <RotateCcw size={20} />
-              Újra próbálom
+              <RotateCcw size={20} className="shrink-0" />
+              <span>Újra próbálom</span>
             </button>
             <button
               onClick={() => router.push('/')}
-              className="flex-1 bg-gray-200 dark:bg-[#323232] hover:bg-gray-300 dark:hover:bg-[#3a3a3a] text-gray-800 dark:text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all border border-gray-300 dark:border-[#3a3a3a] shadow-md hover:shadow-lg"
+              className="flex-1 min-h-13 bg-gray-200 dark:bg-[#323232] hover:bg-[#dbdde0] dark:hover:bg-[#363636] text-gray-800 dark:text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all border border-gray-300 dark:border-[#3a3a3a] active:scale-95"
             >
-              <Home size={20} />
-              Főoldal
+              <Home size={20} className="shrink-0" />
+              <span>Főoldal</span>
             </button>
           </div>
         </div>
 
-        {/* Detailed Answers */}
-        <div className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl shadow-lg p-6 mb-6">
-          <h2 className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-4">Részletes megoldások</h2>
-        </div>
+        {/* Detailed Answers Header */}
+        {/* <div className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl shadow-lg p-6 mb-6">
+          <h2 className="text-xl md:text-2xl font-bold text-blue-600 dark:text-blue-400">Részletes megoldások</h2>
+        </div> */}
 
-        <div className="space-y-4">
+        <h2 className="text-2xl font-bold mb-6 px-2 dark:text-white uppercase tracking-widest text-center sm:text-left">
+          Részletes elemzés
+        </h2>
+
+        <div className="space-y-4 mb-10">
           {result.answers.map((answer, index) => (
             <div
               key={answer.questionId}
-              className={`bg-white dark:bg-[#2b2b2b] border-2 rounded-xl shadow-md p-6 ${answer.isCorrect ? 'border-green-500' : 'border-red-500'
-                }`}
+              className={`bg-white dark:bg-[#2b2b2b] border-2 rounded-xl shadow-md p-5 md:p-6 ${
+                answer.isCorrect ? 'border-green-500' : 'border-red-500'
+              }`}
             >
               <div className="flex items-start gap-3 mb-4">
                 <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold shrink-0">
                   {index + 1}
                 </span>
-                <p className="text-gray-800 dark:text-white flex-1">{answer.questionText}</p>
+                <p className="text-gray-800 dark:text-white flex-1 font-medium">{answer.questionText}</p>
                 {answer.isCorrect ? (
                   <CheckCircle className="text-green-500 shrink-0" size={24} />
                 ) : (
@@ -159,7 +165,7 @@ export default function ResultsPage() {
                 )}
               </div>
 
-              <div className="space-y-2 ml-12">
+              <div className="space-y-2 sm:ml-12">
                 {answer.options.map((option, oIndex) => {
                   const isUserAnswer = answer.userAnswers.includes(oIndex)
                   const isCorrectAnswer = answer.correctAnswers.includes(oIndex)
@@ -178,18 +184,13 @@ export default function ResultsPage() {
                   return (
                     <div
                       key={oIndex}
-                      className={`px-4 py-3 rounded-lg flex items-center gap-3 ${bgColor}`}
+                      className={`min-h-12 px-4 py-3 rounded-lg flex items-center gap-3 ${bgColor}`}
                     >
                       {icon}
-                      <span className="flex-1">{option}</span>
+                      <span className="flex-1 text-sm md:text-base">{option}</span>
                       {isUserAnswer && !isCorrectAnswer && (
-                        <span className="text-xs bg-red-800 px-2 py-1 rounded">
-                          Te ezt választottad
-                        </span>
-                      )}
-                      {isCorrectAnswer && (
-                        <span className="text-xs bg-green-800 px-2 py-1 rounded">
-                          Helyes válasz
+                        <span className="text-[10px] bg-black/20 text-white px-2 py-1 rounded shrink-0 font-bold uppercase">
+                          Te választásod
                         </span>
                       )}
                     </div>

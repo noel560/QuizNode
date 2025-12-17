@@ -53,7 +53,7 @@ export default function HomePage() {
             <ThemeToggle />
           </div>
           <div className="text-center">
-            <h1 className="text-5xl font-bold bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-4">
+            <h1 className="text-5xl font-bold text-blue-600 dark:text-blue-400 bg-clip-text mb-4">
               QuizNode
             </h1>
             <p className="text-gray-600 dark:text-gray-400 text-xl">
@@ -117,7 +117,7 @@ export default function HomePage() {
                     e.stopPropagation()
                     router.push(`/quiz/${quiz.id}`)
                   }}
-                  className="w-full bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg"
+                  className="w-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/40 py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all duration-200"
                 >
                   <Play size={20} />
                   Kvíz indítása

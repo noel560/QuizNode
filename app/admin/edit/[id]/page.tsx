@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
-import { Plus, Trash2, Save, ArrowLeft, Check, Loader2 } from 'lucide-react'
+import { Plus, Trash2, Save, ArrowLeft, Check, Loader2, ChevronDown } from 'lucide-react'
+import ThemeToggle from '@/components/ThemeToggle'
 
 interface Question {
   questionText: string
@@ -132,6 +133,9 @@ export default function QuizEditPage() {
     if (type === 'truefalse') {
       updated[index].options = ['Igaz', 'Hamis']
       updated[index].correctAnswers = []
+    } else {
+      updated[index].options = ['', '']
+      updated[index].correctAnswers = []
     }
 
     setQuestions(updated)
@@ -205,193 +209,149 @@ export default function QuizEditPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#202020] transition-colors duration-300 p-6">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#202020] transition-colors duration-300 p-3 md:p-6">
       <div className="max-w-5xl mx-auto">
-        {/* Header and Actions */}
-        <div className="flex items-center justify-between mb-8">
-          <button
-            onClick={() => router.push('/admin')}
-            className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-2 transition-colors duration-200"
-          >
-            <ArrowLeft size={20} />
-            Vissza az admin felületre
-          </button>
-          <button
-            onClick={handleSave}
-            disabled={saving}
-            className="bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 disabled:from-gray-400 disabled:to-gray-400 text-white px-6 py-3 rounded-lg font-bold flex items-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg disabled:shadow-none"
-          >
-            <Save size={20} />
-            {saving ? 'Mentés...' : 'Kvíz mentése'}
-          </button>
-        </div>
+        
+        {/* Header - Kompakt mobilon */}
+        <div className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl shadow-lg p-4 md:p-6 mb-6">
+          <div className="flex justify-between items-center mb-6">
+            <button
+              onClick={() => router.push('/admin')}
+              className="flex items-center gap-1 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white transition-colors text-sm md:text-base"
+            >
+              <ArrowLeft size={20} />
+              <span className="hidden sm:inline">Vissza az admin felületre</span>
+              <span className="sm:hidden text-sm font-semibold">Vissza</span>
+            </button>
 
-        {/* Quiz Details Card */}
-        <div className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl shadow-lg p-6 mb-8">
-          <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-4">
-            Kvíz szerkesztése
-          </h2>
-          <div className="space-y-4">
-            <div>
-              <label htmlFor="title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Cím
-              </label>
-              <input
-                id="title"
-                type="text"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-[#3a3a3a] rounded-lg bg-gray-50 dark:bg-[#323232] text-gray-800 dark:text-white focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
-                placeholder="Add meg a kvíz címét"
-              />
-            </div>
-            <div>
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                Leírás (opcionális)
-              </label>
-              <textarea
-                id="description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                rows={3}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-[#3a3a3a] rounded-lg bg-gray-50 dark:bg-[#323232] text-gray-800 dark:text-white focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
-                placeholder="Rövid leírás a kvízről"
-              />
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
+              <button
+                onClick={handleSave}
+                disabled={saving}
+                className="bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/40 px-4 py-2 rounded-lg font-bold flex items-center gap-2 active:scale-95 disabled:opacity-50 text-sm transition-all"
+              >
+                {saving ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
+                {saving ? '...' : 'Mentés'}
+              </button>
             </div>
           </div>
+
+          <input
+            placeholder="Kvíz címe"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+            className="w-full px-4 py-2 md:py-3 rounded-lg border border-gray-300 dark:border-[#3a3a3a] bg-gray-100 dark:bg-[#202020] text-gray-800 dark:text-white text-xl md:text-2xl font-bold focus:ring-2 focus:ring-blue-500 mb-3 outline-hidden"
+          />
+
+          <textarea
+            placeholder="Kvíz leírása (opcionális)"
+            value={description}
+            onChange={e => setDescription(e.target.value)}
+            rows={2}
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-[#3a3a3a] bg-gray-100 dark:bg-[#202020] text-gray-700 dark:text-gray-300 focus:ring-2 focus:ring-blue-500 outline-hidden text-sm"
+          />
         </div>
 
-        {/* Questions List */}
-        <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
-          Kérdések ({questions.length})
-        </h2>
-        <div className="space-y-6">
-          {questions.map((question, qIndex) => (
-            <div
-              key={qIndex}
-              className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl shadow-lg p-6"
-            >
-              <div className="flex justify-between items-start mb-4">
-                <h3 className="text-xl font-semibold text-gray-700 dark:text-gray-200">
-                  {qIndex + 1}. Kérdés
-                </h3>
-                <button
-                  onClick={() => removeQuestion(qIndex)}
-                  className="text-red-500 hover:text-red-700 dark:hover:text-red-400 transition-colors duration-200 p-2 rounded-full hover:bg-red-50 dark:hover:bg-[#3c3c3c]"
-                  title="Kérdés törlése"
-                >
-                  <Trash2 size={20} />
+        {/* Questions */}
+        <div className="space-y-6 mb-8">
+          {questions.map((q, qi) => (
+            <div key={qi} className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl shadow-md p-4 md:p-6">
+              
+              <div className="flex justify-between items-center mb-4 gap-2">
+                <div className="flex items-center gap-2 overflow-x-auto no-scrollbar">
+                  <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap">
+                    {qi + 1}. kérdés
+                  </span>
+                  <div className="relative shrink-0">
+                    <select
+                      value={q.questionType}
+                      onChange={(e) => changeQuestionType(qi, e.target.value as any)}
+                      className="appearance-none bg-gray-100 dark:bg-[#323232] text-gray-700 dark:text-gray-200 pl-3 pr-8 py-1 rounded-lg text-xs border border-gray-300 dark:border-[#444] outline-hidden cursor-pointer"
+                    >
+                      <option value="single">Egy válasz</option>
+                      <option value="multiple">Több válasz</option>
+                      <option value="truefalse">Igaz/Hamis</option>
+                    </select>
+                    <ChevronDown size={14} className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none opacity-50" />
+                  </div>
+                </div>
+                
+                <button onClick={() => removeQuestion(qi)} className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg shrink-0">
+                  <Trash2 size={18} />
                 </button>
               </div>
 
-              {/* Question Text */}
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  Kérdés szövege
-                </label>
-                <textarea
-                  value={question.questionText}
-                  onChange={(e) => updateQuestion(qIndex, 'questionText', e.target.value)}
-                  rows={2}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-[#3a3a3a] rounded-lg bg-gray-50 dark:bg-[#323232] text-gray-800 dark:text-white focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
-                  placeholder="Írd be a kérdés szövegét"
-                />
-              </div>
+              <textarea
+                placeholder="Kérdés szövege..."
+                value={q.questionText}
+                onChange={e => updateQuestion(qi, 'questionText', e.target.value)}
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-[#3a3a3a] bg-gray-50 dark:bg-[#202020] text-gray-800 dark:text-white mb-4 outline-hidden focus:ring-1 focus:ring-blue-500 text-sm md:text-base"
+                rows={2}
+              />
 
-              {/* Question Type */}
-              <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  Kérdés típusa
-                </label>
-                <div className="flex gap-3">
-                  {['single', 'multiple', 'truefalse'].map((type) => (
+              <div className="space-y-2">
+                {q.options.map((option, oi) => (
+                  <div key={oi} className="flex items-center gap-2">
                     <button
-                      key={type}
-                      onClick={() => changeQuestionType(qIndex, type as 'single' | 'multiple' | 'truefalse')}
-                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                        question.questionType === type
-                          ? 'bg-blue-600 text-white shadow-md'
-                          : 'bg-gray-100 dark:bg-[#3a3a3a] text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-[#444444]'
+                      onClick={() => toggleCorrectAnswer(qi, oi)}
+                      className={`shrink-0 w-10 h-10 rounded-lg flex items-center justify-center border-2 transition-all ${
+                        q.correctAnswers.includes(oi)
+                          ? 'bg-green-500 border-green-500 text-white'
+                          : 'border-gray-300 dark:border-[#444] text-transparent'
                       }`}
                     >
-                      {type === 'single' ? 'Egyszeres választás' : type === 'multiple' ? 'Többszörös választás' : 'Igaz/Hamis'}
+                      <Check size={20} />
                     </button>
-                  ))}
-                </div>
-              </div>
+                    
+                    <input
+                      placeholder={`${oi + 1}. válasz`}
+                      value={option}
+                      disabled={q.questionType === 'truefalse'}
+                      onChange={e => updateOption(qi, oi, e.target.value)}
+                      className="flex-1 px-3 py-2 rounded-lg border border-gray-200 dark:border-[#3a3a3a] bg-white dark:bg-[#2b2b2b] text-sm outline-hidden focus:border-blue-500"
+                    />
 
-              {/* Options */}
-              <div className="space-y-3">
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-                  Válaszlehetőségek
-                </label>
-                {question.options.map((option, oIndex) => {
-                  const isCorrect = question.correctAnswers.includes(oIndex)
-                  return (
-                    <div key={oIndex} className="flex items-center gap-3">
-                      <button
-                        onClick={() => toggleCorrectAnswer(qIndex, oIndex)}
-                        className={`p-2 rounded-full transition-colors duration-200 border-2 ${
-                          isCorrect
-                            ? 'bg-green-500 border-green-500 text-white'
-                            : 'bg-white dark:bg-[#2b2b2b] border-gray-300 dark:border-[#3a3a3a] text-transparent hover:bg-green-50 dark:hover:bg-[#3c3c3c]'
-                        }`}
-                        title="Helyes válasz jelölése"
-                      >
-                        <Check size={16} />
+                    {q.questionType !== 'truefalse' && q.options.length > 2 && (
+                      <button onClick={() => removeOption(qi, oi)} className="p-2 text-gray-400 hover:text-red-500 shrink-0">
+                        <Trash2 size={16} />
                       </button>
-
-                      <input
-                        type="text"
-                        value={option}
-                        onChange={(e) => updateOption(qIndex, oIndex, e.target.value)}
-                        className={`grow px-4 py-2 border rounded-lg bg-gray-50 dark:bg-[#323232] text-gray-800 dark:text-white focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 ${
-                          isCorrect ? 'border-green-400 dark:border-green-600' : 'border-gray-300 dark:border-[#3a3a3a]'
-                        }`}
-                        placeholder={`Válasz ${oIndex + 1}`}
-                        disabled={question.questionType === 'truefalse'}
-                      />
-
-                      {(question.questionType !== 'truefalse' && question.options.length > 2) && (
-                        <button
-                          onClick={() => removeOption(qIndex, oIndex)}
-                          className="text-gray-400 hover:text-red-500 transition-colors duration-200 p-2 rounded-full"
-                          title="Válaszlehetőség törlése"
-                        >
-                          <Trash2 size={16} />
-                        </button>
-                      )}
-                    </div>
-                  )
-                })}
-                {question.questionType !== 'truefalse' && (
-                  <button
-                    onClick={() => addOption(qIndex)}
-                    className="w-full bg-gray-100 dark:bg-[#323232] hover:bg-gray-200 dark:hover:bg-[#3a3a3a] text-gray-600 dark:text-gray-400 border border-dashed border-gray-300 dark:border-[#444444] py-2 rounded-lg flex items-center justify-center gap-2 mt-2 transition-colors duration-200"
-                  >
-                    <Plus size={18} />
-                    Válaszlehetőség hozzáadása
-                  </button>
-                )}
+                    )}
+                  </div>
+                ))}
               </div>
+
+              {q.questionType !== 'truefalse' && (
+                <button
+                  onClick={() => addOption(qi)}
+                  className="mt-4 flex items-center gap-2 text-sm text-blue-600 dark:text-blue-400 font-semibold active:scale-95"
+                >
+                  <Plus size={16} />
+                  Válasz hozzáadása
+                </button>
+              )}
             </div>
           ))}
         </div>
 
-        {/* Add Question Button */}
-        <div className="mt-8 text-center">
+        {/* Footer actions */}
+        <div className="flex flex-col gap-3 mb-10">
           <button
             onClick={addQuestion}
-            className="bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-8 py-3 rounded-lg font-bold flex items-center justify-center gap-2 transition-all duration-200 shadow-md hover:shadow-lg mx-auto"
+            className="w-full bg-white dark:bg-[#2b2b2b] border-2 border-dashed border-gray-300 dark:border-[#3a3a3a] text-gray-600 dark:text-gray-400 p-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:border-blue-500 hover:text-blue-500 transition-all active:scale-95"
           >
             <Plus size={20} />
-            Új kérdés hozzáadása
+            Új kérdés
           </button>
-        </div>
-
-        {/* Footer */}
-        <div className="text-center mt-12 text-gray-500 dark:text-gray-600 text-sm">
-          <p>Készítette: Quiz App 2024</p>
+          
+          <button
+            onClick={handleSave}
+            disabled={saving}
+            className="md:hidden w-full bg-blue-600 text-white p-4 rounded-xl font-bold shadow-lg active:scale-95 flex items-center justify-center gap-2"
+          >
+            <Save size={20} />
+            Kvíz frissítése
+          </button>
         </div>
       </div>
     </div>

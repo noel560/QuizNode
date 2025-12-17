@@ -29,12 +29,12 @@ export default function AdminDashboard() {
       router.push('/admin/login')
       return
     }
-    
+
     const storedName = localStorage.getItem('adminUsername');
     if (storedName) {
-        setUserName(storedName);
+      setUserName(storedName);
     } else {
-        setUserName('Admin'); // Fallback
+      setUserName('Admin'); // Fallback
     }
 
     fetchQuizzes()
@@ -162,127 +162,126 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-[#202020] transition-colors duration-300 p-6">
+    <div className="min-h-screen bg-gray-50 dark:bg-[#202020] transition-colors duration-300 p-4 md:p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl shadow-lg p-6 mb-6">
-          <div className="flex justify-between items-center mb-4">
+        <div className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl shadow-lg p-4 md:p-6 mb-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
             <div>
-              <h1 className="text-3xl font-bold bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-2">Admin Kezelőfelület</h1>
-              <p className="text-gray-600 dark:text-gray-400">{userName ? `Szia, ${userName}!` : 'Admin Kezelőfelület'}</p>
+              <h1 className="text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-400 bg-clip-text mb-1">
+                Admin Kezelőfelület
+              </h1>
+              <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
+                {userName ? `Szia, ${userName}!` : 'Üdvözöllek az admin felületen'}
+              </p>
             </div>
-            <ThemeToggle />
+            <div className="self-end sm:self-auto">
+              <ThemeToggle />
+            </div>
           </div>
-          <div className="flex flex-wrap gap-3">
+
+          {/* Gombok - Mobilon 2 oszlopos rács, felette sima sor */}
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 md:gap-3">
             <button
               onClick={() => router.push('/')}
-              className="bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 transition-all shadow-sm hover:shadow-md"
+              className="bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/40 px-3 py-2 rounded-lg font-semibold flex items-center justify-center gap-2 text-sm transition-all active:scale-95 border border-blue-200 dark:border-blue-900/30"
             >
-              <Home size={18} />
-              Főoldal
+              <Home size={16} />
+              <span className="hidden xs:inline">Főoldal</span>
+              <span className="xs:hidden">Főoldal</span>
             </button>
-            <label className="bg-gray-200 dark:bg-[#323232] hover:bg-gray-300 dark:hover:bg-[#3a3a3a] text-gray-800 dark:text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 transition-all border border-gray-300 dark:border-[#3a3a3a] shadow-sm hover:shadow-md cursor-pointer">
-              <Upload size={18} />
-              {importing ? 'Importálás...' : 'Kvíz Importálása'}
-              <input
-                type="file"
-                accept=".json"
-                onChange={handleImport}
-                className="hidden"
-                disabled={importing}
-              />
-            </label>
+
             <button
               onClick={() => router.push('/admin/create')}
-              className="bg-gray-200 dark:bg-[#323232] hover:bg-gray-300 dark:hover:bg-[#3a3a3a] text-gray-800 dark:text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 transition-all border border-gray-300 dark:border-[#3a3a3a] shadow-sm hover:shadow-md"
+              className="bg-gray-200 dark:bg-[#323232] text-gray-800 dark:text-white px-3 py-2 rounded-lg font-semibold flex items-center justify-center gap-2 text-sm transition-all border border-gray-300 dark:border-[#3a3a3a] active:scale-95 dark:hover:bg-[#363636] hover:bg-[#dbdde0]"
             >
-              <Plus size={18} />
+              <Plus size={16} />
               Új Kvíz
             </button>
+
+            <label className="bg-gray-200 dark:bg-[#323232] text-gray-800 dark:text-white px-3 py-2 rounded-lg font-semibold flex items-center justify-center gap-2 text-sm transition-all border border-gray-300 dark:border-[#3a3a3a] cursor-pointer active:scale-95 dark:hover:bg-[#363636] hover:bg-[#dbdde0]">
+              <Upload size={16} />
+              <span className="truncate">{importing ? '...' : 'Import'}</span>
+              <input type="file" accept=".json" onChange={handleImport} className="hidden" disabled={importing} />
+            </label>
+
             <button
               onClick={() => router.push('/admin/settings')}
-              className="bg-gray-200 dark:bg-[#323232] hover:bg-gray-300 dark:hover:bg-[#3a3a3a] text-gray-800 dark:text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 transition-all border border-gray-300 dark:border-[#3a3a3a] shadow-sm hover:shadow-md"
+              className="bg-gray-200 dark:bg-[#323232] text-gray-800 dark:text-white px-3 py-2 rounded-lg font-semibold flex items-center justify-center gap-2 text-sm transition-all border border-gray-300 dark:border-[#3a3a3a] active:scale-95 dark:hover:bg-[#363636] hover:bg-[#dbdde0]"
             >
-              <Settings size={18} />
+              <Settings size={16} />
               Beállítások
             </button>
+
             <button
               onClick={handleLogout}
-              className="bg-gray-200 dark:bg-[#323232] hover:bg-gray-300 dark:hover:bg-[#3a3a3a] text-gray-800 dark:text-white px-4 py-2 rounded-lg font-semibold flex items-center gap-2 transition-all border border-gray-300 dark:border-[#3a3a3a] shadow-sm hover:shadow-md"
+              className="col-span-2 sm:col-auto bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 px-3 py-2 rounded-lg font-semibold flex items-center justify-center gap-2 text-sm transition-all border border-red-200 dark:border-red-900/30 active:scale-95 hover:bg-red-100 dark:hover:bg-red-900/40"
             >
-              <LogOut size={18} />
+              <LogOut size={16} />
               Kilépés
             </button>
           </div>
         </div>
 
-        {/* Quiz List */}
-        {quizzes.length === 0 ? (
-          <div className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl shadow-lg p-12 text-center">
-            <p className="text-gray-600 dark:text-gray-400 text-xl mb-4">Még nincsenek kvízek</p>
-            <button
-              onClick={() => router.push('/admin/create')}
-              className="bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white px-6 py-3 rounded-lg font-bold inline-flex items-center gap-2 shadow-md hover:shadow-lg transition-all"
-            >
-              <Plus size={20} />
-              Hozz létre egyet!
-            </button>
-          </div>
-        ) : (
-          <div className="grid gap-4">
-            {quizzes.map((quiz) => (
-              <div
-                key={quiz.id}
-                className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl shadow-md hover:shadow-lg p-6 transition-all"
-              >
-                <div className="flex justify-between items-start">
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-                      {quiz.title}
-                    </h3>
-                    {quiz.description && (
-                      <p className="text-gray-600 dark:text-gray-400 mb-3">{quiz.description}</p>
-                    )}
-                    <div className="flex gap-4 text-sm text-gray-500 dark:text-gray-500">
-                      <span>📝 {quiz._count.questions} kérdés</span>
-                      <span>📊 {quiz._count.attempts} kitöltés</span>
-                      <span>📅 {new Date(quiz.createdAt).toLocaleDateString('hu-HU')}</span>
-                    </div>
-                  </div>
+        {/* Kvíz lista - Mobilon 1 oszlop, tablettől 2, desktopon 3 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {quizzes.map((quiz) => (
+            <div key={quiz.id} className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl p-5 shadow-md flex flex-col justify-between">
+              <div>
+                <h3 className="text-xl font-bold mb-2 dark:text-white truncate">{quiz.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-2">
+                  {quiz.description || 'Nincs leírás'}
+                </p>
+              </div>
 
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => router.push(`/quiz/${quiz.id}`)}
-                      className="bg-green-600 hover:bg-green-700 text-white p-2 rounded-lg transition-all shadow-sm hover:shadow-md"
-                      title="Kvíz indítása"
-                    >
-                      <Play size={18} />
-                    </button>
-                    <button
-                      onClick={() => router.push(`/admin/edit/${quiz.id}`)}
-                      className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg transition-all shadow-sm hover:shadow-md"
-                      title="Szerkesztés"
-                    >
-                      <Edit size={18} />
-                    </button>
-                    <button
-                      onClick={() => exportQuiz(quiz.id)}
-                      className="bg-cyan-600 hover:bg-cyan-700 text-white p-2 rounded-lg transition-all shadow-sm hover:shadow-md"
-                      title="Export JSON"
-                    >
-                      <Download size={18} />
-                    </button>
-                    <button
-                      onClick={() => deleteQuiz(quiz.id)}
-                      className="bg-red-600 hover:bg-red-700 text-white p-2 rounded-lg transition-all shadow-sm hover:shadow-md"
-                      title="Törlés"
-                    >
-                      <Trash2 size={18} />
-                    </button>
-                  </div>
+              <div className="flex flex-col gap-3">
+                <div className="flex justify-between text-xs text-gray-500 dark:text-gray-500 border-t border-gray-100 dark:border-[#3a3a3a] pt-3">
+                  <span>{quiz._count.questions} kérdés</span>
+                  <span>{quiz._count.attempts} kitöltés</span>
+                </div>
+
+                {/* Akció gombok - Most már 4 gombbal */}
+                <div className="grid grid-cols-4 gap-2">
+                  <button
+                    onClick={() => router.push(`/quiz/${quiz.id}`)}
+                    className="p-2 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-lg flex justify-center hover:bg-blue-100 dark:hover:bg-blue-900/40 transition-colors"
+                    title="Megtekintés"
+                  >
+                    <Play size={18} />
+                  </button>
+
+                  <button
+                    onClick={() => router.push(`/admin/edit/${quiz.id}`)} // SZERKESZTÉS GOMB
+                    className="p-2 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 rounded-lg flex justify-center hover:bg-orange-100 dark:hover:bg-orange-900/40 transition-colors"
+                    title="Szerkesztés"
+                  >
+                    <Edit size={18} />
+                  </button>
+
+                  <button
+                    onClick={() => exportQuiz(quiz.id)}
+                    className="p-2 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-lg flex justify-center hover:bg-green-100 dark:hover:bg-green-900/40 transition-colors"
+                    title="Exportálás"
+                  >
+                    <Download size={18} />
+                  </button>
+
+                  <button
+                    onClick={() => deleteQuiz(quiz.id)}
+                    className="p-2 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 rounded-lg flex justify-center hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors"
+                    title="Törlés"
+                  >
+                    <Trash2 size={18} />
+                  </button>
                 </div>
               </div>
-            ))}
+            </div>
+          ))}
+        </div>
+
+        {quizzes.length === 0 && !loading && (
+          <div className="text-center py-12 bg-white dark:bg-[#2b2b2b] rounded-xl border border-dashed border-gray-400">
+            <p className="text-gray-500">Még nincsenek kvízek.</p>
           </div>
         )}
       </div>

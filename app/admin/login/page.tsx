@@ -53,11 +53,11 @@ export default function AdminLogin() {
       <div className="bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-[#3a3a3a] rounded-xl shadow-xl p-8 w-full max-w-md relative">
         <button
           onClick={() => router.push('/')}
-          className="absolute -top-12 left-0 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 flex items-center gap-2 transition-colors duration-200">
+          className="absolute -top-12 left-0 text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white flex items-center gap-2 transition-colors duration-200">
           <ArrowLeft size={20} />
           Vissza a főoldalra
         </button>
-        <h1 className="text-3xl font-bold bg-linear-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent mb-6 text-center">
+        <h1 className="text-3xl font-bold text-blue-600 dark:text-blue-400 bg-clip-text mb-6 text-center">
           Admin Bejelentkezés
         </h1>
 
@@ -93,7 +93,7 @@ export default function AdminLogin() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-linear-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 disabled:from-gray-400 disabled:to-gray-500 text-white py-3 rounded-lg font-bold transition-all duration-200 shadow-md hover:shadow-lg"
+            className="w-full dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/40 disabled:from-gray-400 disabled:to-gray-500 py-3 rounded-lg font-bold transition-all duration-200"
           >
             {loading ? 'Bejelentkezés...' : 'Bejelentkezés'}
           </button>
