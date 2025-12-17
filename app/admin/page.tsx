@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Plus, Edit, Trash2, Play, LogOut, Download, Upload, Settings, Home } from 'lucide-react'
+import { Plus, Edit, Trash2, Play, LogOut, Download, Upload, Settings, Home, Loader2 } from 'lucide-react'
 import ThemeToggle from '@/components/ThemeToggle'
 
 interface Quiz {
@@ -155,8 +155,8 @@ export default function AdminDashboard() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 dark:bg-[#202020] transition-colors duration-300 flex items-center justify-center">
-        <div className="text-blue-600 text-2xl">Betöltés...</div>
+      <div className="min-h-screen bg-gray-50 dark:bg-[#202020] flex items-center justify-center transition-colors duration-300">
+        <Loader2 className="text-blue-600 animate-spin" size={48} />
       </div>
     )
   }
